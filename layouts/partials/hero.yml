@@ -1,0 +1,16 @@
+name: Nav 01
+category: Nav
+parameters:
+  - name: ActionButtonText
+    type: string
+    config: params.main.hero.text
+    definition:
+      - name: String
+        optional: false
+
+  - name: ActionButtonHref
+    type: string
+    config: params.main.hero.href
+    definition:
+      - name: String
+        optional: false

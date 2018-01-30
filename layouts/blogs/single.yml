@@ -1,0 +1,6 @@
+label: Hero-Blog-Header
+type: header
+category: Layout
+content: |-
+  <div class="blk-row"><div class="blk3"></div><div class="blk3"></div><div class="blk3"></div></div>
+  <style>.blk-row::after{content:"";clear:both;display:block;}.blk-row{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;}.blk3{float:left;width:33.3333%;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;min-height:75px;}</style>

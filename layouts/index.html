@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
 
+  <!-- TODO: Update this to use https://gohugo.io/templates/base/ base blocks -->
+
   {{ partial "head.html" . }}
 
   <body id="page-top" class="index">
@@ -40,5 +42,6 @@
     {{ end }}
 
     {{ partial "js.html" . }}
+
   </body>
 </html>

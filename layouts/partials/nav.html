@@ -11,12 +11,12 @@
         <span class="icon-bar"></span>
       </button>
       {{ if .Site.Params.navigation.logo }}
-        <a class="navbar-brand page-scroll" href="{{ if .IsHome }}/#page-top{{ else }}{{ .Site.BaseURL }}{{ end }}">
+        <a editor=true parameditable=true editor-data-param="navigation.brand:Text:Logo name,navigation.logo:Image:Site Logo" class="navbar-brand page-scroll" href="{{ if .IsHome }}/#page-top{{ else }}{{ .Site.BaseURL }}{{ end }}">
           {{ $url := printf "img/%s" .Site.Params.navigation.logo }}
           <img src="{{ $url | absURL }}" class="img-responsive" alt="{{ .Site.Params.navigation.brand }}">
         </a>
       {{ else }}
-        <a class="navbar-brand page-scroll" href="{{ if .IsHome }}/#page-top{{ else }}{{ .Site.BaseURL }}{{ end }}">
+        <a editor=true parameditable=true editor-data-param="navigation.brand:Text:Logo name,navigation.logo:Image:Site Logo" class="navbar-brand page-scroll" href="{{ if .IsHome }}/#page-top{{ else }}{{ .Site.BaseURL }}{{ end }}">
           {{ .Site.Params.navigation.brand }}
         </a>
       {{ end }}
@@ -24,52 +24,92 @@
     </div>
     {{ "<!-- Collect the nav links, forms, and other content for toggling -->" | safeHTML }}
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
+      <ul editor=true parameditable=true class="nav navbar-nav navbar-right" show-editor-menu='nav'>
         <li class="hidden">
-          <a href="{{ if .IsHome }}/#page-top{{ else }}{{ .Site.BaseURL }}{{ end }}"></a>
+          <a parameditable=true href="{{ if .IsHome }}/#page-top{{ else }}{{ .URL| absLangURL }}{{ end }}"></a>
         </li>
 
         {{ range .Site.Menus.prepend }}
           <li>
-            <a href="{{ .URL }}">{{ .Name | markdownify }}</a>
+            <a href="{{ .URL| absLangURL }}">{{ .Name | markdownify }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.services.enable }}
           <li>
-            <a class="page-scroll" href="{{ .Site.BaseURL }}#services">{{ with .Site.Params.navigation.services }}{{ . }}{{ end }}</a>
+            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL | absLangURL }}#services">{{ with .Site.Params.navigation.services }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.portfolio.enable }}
           <li>
-            <a class="page-scroll" href="{{ .Site.BaseURL }}#portfolio">{{ with .Site.Params.navigation.portfolio }}{{ . }}{{ end }}</a>
+            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#portfolio">{{ with .Site.Params.navigation.portfolio }}{{ . }}{{ end }}</a>
+          </li>
+        {{ end }}
+
+        {{ if .Site.Params.blogs.enable }}
+          <li>
+            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}blogs">{{ with .Site.Params.navigation.blogs }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.about.enable }}
           <li>
-            <a class="page-scroll" href="{{ .Site.BaseURL }}#about">{{ with .Site.Params.navigation.about }}{{ . }}{{ end }}</a>
+            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#about">{{ with .Site.Params.navigation.about }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.team.enable }}
           <li>
-            <a class="page-scroll" href="{{ .Site.BaseURL }}#team">{{ with .Site.Params.navigation.team }}{{ . }}{{ end }}</a>
+            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#team">{{ with .Site.Params.navigation.team }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.contact.enable }}
           <li>
-            <a class="page-scroll" href="{{ .Site.BaseURL }}#contact">{{ with .Site.Params.navigation.contact }}{{ . }}{{ end }}</a>
+            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#contact">{{ with .Site.Params.navigation.contact }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
-        {{ range .Site.Menus.postpend }}
-          <li>
-            <a href="{{ .URL }}">{{ .Name }}</a>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle bg-black" data-toggle="dropdown">{{ .Lang }}</a>
+            <ul class="dropdown-menu bg-black">
+                <li class="dropdown menu-item">
+                   <a href="{{ .Permalink }}">
+                   {{ $langVal := (i18n (lower (default .Lang .Site.Language.Lang)) .) }}
+ 	           {{ $langLinkVar := .Lang | printf "langLink_%s" }}
+                   {{ $.Scratch.Set $langLinkVar "1" }}
+	           {{ $langVal }}
+                   </a>
+                </li>
+                {{ range .Translations }}
+                  {{ $langVal := (i18n (lower (default .Lang .Site.Language.Lang)) .) }}
+                  {{ if $langVal }}
+                    <li class="dropdown menu-item">
+                       <a href="{{ .Permalink }}">
+                        {{ $langVal }}
+		        {{ $langLinkVar := .Lang | printf "langLink_%s" }}
+                        {{ $.Scratch.Set $langLinkVar "1" }}
+                       </a>
+                    </li>
+                  {{ else }}
+                  {{ end }}
+                {{ end }}
+
+
+		{{ range $.Site.Home.AllTranslations }}
+		   {{ $langLinkVar := .Language.Lang | printf "langLink_%s" }}
+                   {{ if eq ($.Scratch.Get $langLinkVar) "1" }}
+                   {{ else }}
+                      {{ $langVal := (i18n (lower (default .Language.Lang .Site.Language.Lang)) .) }}
+                      {{ if $langVal }}
+	                 <li><a href="{{ .URL }}">{{ $langVal }}</a></li>
+	              {{ end }}
+	           {{ end }}
+	        {{ end }}
+
+            </ul>
           </li>
-        {{ end }}
       </ul>
     </div>
     {{ "<!-- /.navbar-collapse -->" | safeHTML }}

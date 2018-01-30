@@ -1,10 +1,15 @@
-{{ "<!-- Hero -->" | safeHTML }}
-<header>
-  <div class="container">
-    <div class="intro-text">
-      <div class="intro-lead-in">{{ with .Site.Params.hero.title }}{{ . | markdownify }}{{ end }}</div>
-      <div class="intro-heading">{{ with .Site.Params.hero.subtitle }}{{ . | markdownify }}{{ end }}</div>
-      <a href="#services" class="page-scroll btn btn-xl">{{ with .Site.Params.hero.buttonText }}{{ . }}{{ end }}</a>
+{{ "<!-- Hero 1 -->" | safeHTML }}
+{{ if .IsHome }}
+  <header editor=true partial='hero' show-editor-menu='imageonly' editor-data-param="hero.background_image:Image:Background Image" class="singleimgbg" style="background-image: url({{ .Site.Params.hero.background_image | absURL }});">
+    <div class="container">
+      <div class="intro-text">
+        <div editor=true parameditable=true editor-data-param="hero.title:Text:Title" class="intro-lead-in">{{ with .Site.Params.hero.title }}{{ . | markdownify }}{{ end }}</div>
+        <div editor=true parameditable=true editor-data-param="hero.subtitle:Text:Subtitle" class="intro-heading">{{ with .Site.Params.hero.subtitle }}{{ . | markdownify }}{{ end }}</div>
+        <a editor=true parameditable=true editor-data-param="hero.href:href:Link,hero.buttonText:Text:Button Text" href="{{ with .Site.Params.hero.href }} {{ . }} {{ end }}" class="page-scroll btn btn-xl">{{ with .Site.Params.hero.buttonText }}{{ . }}{{ end }}</a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
+{{ else }}
+  <header partial='hero' class='none'>
+  </header>
+{{ end }}

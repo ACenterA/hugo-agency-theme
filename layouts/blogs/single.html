@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+
+  <!-- TODO: Update this to use https://gohugo.io/templates/base/ base blocks -->
+
+  {{ partial "head.html" . }}
+
+  <body id="page-top" class="index">
+    {{ partial "nav.html" . }}
+    {{ partial "hero.html" . }}
+
+    <!-- Content -->
+    <section id="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 editor=true editor-param=".Title:text:Title" class="section-heading">{{ .Title }}</h2>
+            <h3 editor=true editor-param=".Description:text:Title" class="section-subheading text-muted">{{ .Description }}</h3>
+          </div>
+        </div>
+
+        <div editor=true class="row text-center">
+      	   {{ .Content }}
+        </div>
+      </div>
+    </section>
+
+
+    {{ if .Site.Params.footer.enable }}
+      {{ partial "footer.html" . }}
+    {{ end }}
+
+    {{ partial "js.html" . }}
+  </body>
+</html>
