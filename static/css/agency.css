@@ -13,6 +13,17 @@ body {
     color: #777;
 }
 
+[contenteditable=false] {
+    // background-color: yellow;
+    outline: 2px dashed #AAA;
+}
+
+
+[contenteditable=true] {
+    // background-color: yellow;
+    outline: 2px dashed #CCC;
+}
+
 .text-primary {
     color: #fed136;
 }
@@ -59,6 +70,7 @@ h6 {
 .img-centered {
     margin: 0 auto;
 }
+
 
 .bg-light-gray {
     background-color: #f7f7f7;
@@ -240,6 +252,18 @@ fieldset[disabled] .btn-xl.active {
     color: #fed136;
 }
 
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  background: transparent !important;
+}
+
+.navbar-nav>li>.dropdown-menu.bg-black {
+  background: black !important;
+}
+
+.navbar-nav>li>.dropdown-menu.transparent {
+  background: transparent !important;
+}
+
 .navbar-default .navbar-nav>.active>a {
     border-radius: 0;
     color: #fff;
@@ -254,7 +278,7 @@ fieldset[disabled] .btn-xl.active {
 
 @media(min-width:768px) {
     .navbar-default {
-        padding: 25px 0;
+        padding: 15px 0;
         border: 0;
         background-color: transparent;
         -webkit-transition: padding .3s;
@@ -286,8 +310,34 @@ fieldset[disabled] .btn-xl.active {
 header {
     text-align: center;
     color: #fff;
+}
+header.none {
+    background-color: black;
+    min-height: 49px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+}
+
+@media(min-width:768px) {
+  header.none {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    min-height: 68px;
+  }
+}
+
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+header.singleimgbg {
     background-attachment: scroll;
-    background-image: url(../img/header-bg.jpg);
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
