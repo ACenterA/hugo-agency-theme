@@ -12,7 +12,7 @@
       </button>
       {{ if .Site.Params.navigation.logo }}
         <a editor=true parameditable=true editor-data-param="navigation.brand:Text:Logo name,navigation.logo:Image:Site Logo" class="navbar-brand page-scroll" href="{{ if .IsHome }}/#page-top{{ else }}{{ .Site.BaseURL }}{{ end }}">
-          {{ $url := printf "img/%s" .Site.Params.navigation.logo }}
+          {{ $url := printf "%s" .Site.Params.navigation.logo }}
           <img src="{{ $url | absURL }}" class="img-responsive" alt="{{ .Site.Params.navigation.brand }}">
         </a>
       {{ else }}
