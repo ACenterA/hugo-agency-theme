@@ -1,6 +1,6 @@
 {{ "<!-- Hero 1 -->" | safeHTML }}
 {{ if .IsHome }}
-  <header editor=true partial='hero' show-editor-menu='imageonly' editor-data-param="hero.background_image:Image:Background Image" class="singleimgbg" style="background-image: url({{ .Site.Params.hero.background_image | absURL }});">
+  <header editor=true partial='hero' show-editor-menu='imageonly' editor-data-param="hero.background_image:Image:Background Image" class="singleimgbg" style="background-image: url({{ if isset .Site.Params.hero "background_image" }}{{ .Site.Params.hero.background_image | absURL }}{{ else }}/img/noImages.png{{ end }});">
     <div class="container">
       <div class="intro-text">
         <div editor=true parameditable=true editor-data-param="hero.title:Text:Title" class="intro-lead-in">{{ with .Site.Params.hero.title }}{{ . | markdownify }}{{ end }}</div>
