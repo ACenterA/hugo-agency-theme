@@ -184,6 +184,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-default {
     border-color: transparent;
     background-color: #222;
+    height:1px;
 }
 
 .navbar-default .navbar-brand {
@@ -204,7 +205,39 @@ fieldset[disabled] .btn-xl.active {
     margin: -15px;
 }
 
+.not-mobile {
+    display:none!important;
+}
+
+.is-mobile {
+    display:block!important;
+}
+.is-mobile-scroll {
+  overflow-y: scroll !important;
+  min-height: 500px !important;
+  max-height: 500px !important;
+}
+
+.language-nav-yellow-delimitor {
+  color: #fed136;
+  padding-left:10px;
+  padding-top: 20px;
+}
+
+
 @media(min-width:768px) {
+    .not-mobile {
+      display:block!important;
+    }
+    .is-mobile {
+        display:none!important;
+    }
+    .is-mobile-scroll {
+      overflow-y: hidden !important;
+      min-height: 0px !important;
+      height: 0px !important;
+      max-height: 0px !important;
+    }
     .navbar-brand>img {
         height: 50px;
         max-width: 300px;
@@ -222,6 +255,7 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default .navbar-collapse {
     border-color: rgba(255,255,255,.02);
+    background-color: #222;
 }
 
 .navbar-default .navbar-toggle {
@@ -864,6 +898,11 @@ section#contact .text-success {
 footer {
     padding: 25px 0;
     text-align: center;
+    background-color: #222;
+    color: white;
+    position: static;
+    bottom: 0px;
+    width: 100%;
 }
 
 footer span.copyright {

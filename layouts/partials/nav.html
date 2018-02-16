@@ -23,10 +23,10 @@
 
     </div>
     {{ "<!-- Collect the nav links, forms, and other content for toggling -->" | safeHTML }}
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul editor=true parameditable=true class="nav navbar-nav navbar-right" show-editor-menu='nav'>
+    <div class="collapse navbar-collapse is-mobile-scroll" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
         <li class="hidden">
-          <a parameditable=true href="{{ if .IsHome }}/#page-top{{ else }}{{ .URL| absLangURL }}{{ end }}"></a>
+          <a href="{{ if .IsHome }}/#page-top{{ else }}{{ .URL| absLangURL }}{{ end }}"></a>
         </li>
 
         {{ range .Site.Menus.prepend }}
@@ -37,49 +37,82 @@
 
         {{ if .Site.Params.services.enable }}
           <li>
-            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL | absLangURL }}#services">{{ with .Site.Params.navigation.services }}{{ . }}{{ end }}</a>
+            <a class="page-scroll" href="{{ .Site.BaseURL | absLangURL }}#services">{{ with .Site.Params.navigation.services }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.portfolio.enable }}
           <li>
-            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#portfolio">{{ with .Site.Params.navigation.portfolio }}{{ . }}{{ end }}</a>
+            <a class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#portfolio">{{ with .Site.Params.navigation.portfolio }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.blogs.enable }}
           <li>
-            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}blogs">{{ with .Site.Params.navigation.blogs }}{{ . }}{{ end }}</a>
+            <a class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}blogs">{{ with .Site.Params.navigation.blogs }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.about.enable }}
           <li>
-            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#about">{{ with .Site.Params.navigation.about }}{{ . }}{{ end }}</a>
+            <a class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#about">{{ with .Site.Params.navigation.about }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.team.enable }}
           <li>
-            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#team">{{ with .Site.Params.navigation.team }}{{ . }}{{ end }}</a>
+            <a class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#team">{{ with .Site.Params.navigation.team }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
         {{ if .Site.Params.contact.enable }}
           <li>
-            <a parameditable=true class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#contact">{{ with .Site.Params.navigation.contact }}{{ . }}{{ end }}</a>
+            <a class="page-scroll" href="{{ .Site.BaseURL| absLangURL }}#contact">{{ with .Site.Params.navigation.contact }}{{ . }}{{ end }}</a>
           </li>
         {{ end }}
 
-        <li class="dropdown">
+        <li class="dropdown is-mobile">
+           <div class="language-nav-yellow-delimitor">Change language</div>
+           <a href="{{ .Permalink }}">
+             {{ $langVal := (i18n (lower (default .Lang .Site.Language.Lang)) .) }}
+             {{ $langLinkVar := .Lang | printf "langLink_%s" }}
+             {{ $.Scratch.Set $langLinkVar "1" }}
+              {{ $langVal }}
+           </a>
+
+           {{ range .Translations }}
+            {{ $langVal := (i18n (lower (default .Lang .Site.Language.Lang)) .) }}
+            {{ if $langVal }}
+                 <a href="{{ .Permalink }}">
+                  {{ $langVal }}
+                  {{ $langLinkVar := .Lang | printf "langLink_%s" }}
+                  {{ $.Scratch.Set $langLinkVar "1" }}
+                 </a>
+            {{ else }}
+            {{ end }}
+          {{ end }}
+
+          {{ range $.Site.Home.AllTranslations }}
+             {{ $langLinkVar := .Language.Lang | printf "langLink_%s" }}
+                         {{ if eq ($.Scratch.Get $langLinkVar) "1" }}
+                         {{ else }}
+                            {{ $langVal := (i18n (lower (default .Language.Lang .Site.Language.Lang)) .) }}
+                            {{ if $langVal }}
+                         <a href="{{ .URL }}">{{ $langVal }}</a>
+                      {{ end }}
+                   {{ end }}
+                {{ end }}
+        </li>
+
+        <li class="dropdown not-mobile">
             <a href="#" class="dropdown-toggle bg-black" data-toggle="dropdown">{{ .Lang }}</a>
             <ul class="dropdown-menu bg-black">
                 <li class="dropdown menu-item">
                    <a href="{{ .Permalink }}">
                    {{ $langVal := (i18n (lower (default .Lang .Site.Language.Lang)) .) }}
- 	           {{ $langLinkVar := .Lang | printf "langLink_%s" }}
+ 	                 {{ $langLinkVar := .Lang | printf "langLink_%s" }}
                    {{ $.Scratch.Set $langLinkVar "1" }}
-	           {{ $langVal }}
+	                  {{ $langVal }}
                    </a>
                 </li>
                 {{ range .Translations }}
@@ -97,16 +130,16 @@
                 {{ end }}
 
 
-		{{ range $.Site.Home.AllTranslations }}
-		   {{ $langLinkVar := .Language.Lang | printf "langLink_%s" }}
-                   {{ if eq ($.Scratch.Get $langLinkVar) "1" }}
-                   {{ else }}
-                      {{ $langVal := (i18n (lower (default .Language.Lang .Site.Language.Lang)) .) }}
-                      {{ if $langVal }}
-	                 <li><a href="{{ .URL }}">{{ $langVal }}</a></li>
-	              {{ end }}
-	           {{ end }}
-	        {{ end }}
+            		{{ range $.Site.Home.AllTranslations }}
+            		   {{ $langLinkVar := .Language.Lang | printf "langLink_%s" }}
+                               {{ if eq ($.Scratch.Get $langLinkVar) "1" }}
+                               {{ else }}
+                                  {{ $langVal := (i18n (lower (default .Language.Lang .Site.Language.Lang)) .) }}
+                                  {{ if $langVal }}
+            	                 <li><a href="{{ .URL }}">{{ $langVal }}</a></li>
+            	              {{ end }}
+            	           {{ end }}
+            	        {{ end }}
 
             </ul>
           </li>
