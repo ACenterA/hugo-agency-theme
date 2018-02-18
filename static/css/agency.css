@@ -4,6 +4,11 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+*{
+  margin:0;
+  padding:0;
+}
+
 body {
     overflow-x: hidden;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -11,6 +16,34 @@ body {
 
 .text-muted {
     color: #777;
+}
+
+.blog-image {
+  width: 80%;
+  display: table;
+  margin: auto;
+}
+
+section.post-content {
+  padding: 0px!important;
+}
+
+section.post-content div.container div.row {
+  margin-top: -80px;
+  background-color: white;
+  position: relative;
+  float: left;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+section.post-content div.container div.row *{
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-top: 20px;
+  width: 105%;
+  margin-left: -15px;
 }
 
 [contenteditable=false] {
@@ -261,6 +294,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-default .navbar-toggle {
     border-color: #fed136;
     background-color: #fed136;
+    margin-right: 50px;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -346,10 +380,11 @@ header {
     color: #fff;
 }
 header.none {
-    background-color: black;
+    background-color: #222;
     min-height: 49px;
     position: fixed;
     top: 0px;
+    z-index: 4;
     width: 100%;
 }
 
@@ -428,6 +463,12 @@ header .intro-text .intro-heading {
 
 section {
     padding: 100px 0;
+}
+
+section.header {
+    padding-top: 100px;
+    padding-bottom: 10px;
+    z-index: 0;
 }
 
 section h2.section-heading {

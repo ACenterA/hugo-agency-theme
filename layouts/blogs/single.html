@@ -9,16 +9,24 @@
     {{ partial "nav.html" . }}
     {{ partial "hero.html" . }}
 
-    <!-- Content -->
-    <section id="services">
+
+    <section class="header">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 editor=true editor-param=".Title:text:Title" class="section-heading">{{ .Title }}</h2>
-            <h3 editor=true editor-param=".Description:text:Title" class="section-subheading text-muted">{{ .Description }}</h3>
+            <h2 editor=true parameditable="sidebar" editor-param=".Title:text:Title" class="section-heading">{{ .Title }}</h2>
+            <h3 editor=true parameditable="sidebar" editor-param=".Description:text:Description" class="section-subheading text-muted">{{ .Description }}</h3>
           </div>
         </div>
+      </div>
+    </section>
+   {{ if .Params.image }}
+     <img{{ with .Site.Params.hero.background_image | absURL }} src="{{ . }}"{{ end }} alt="{{ .Title }}" class="blog-image">
+   {{ end }}
 
+    <!-- Content -->
+    <section class="post-content">
+      <div class="container">
         <div editor=true class="row text-center">
       	   {{ .Content }}
         </div>
