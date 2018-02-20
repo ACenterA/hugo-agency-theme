@@ -33,6 +33,21 @@
       {{ partial "contact.html" . }}
     {{ end }}
 
+    <!-- todo: Modify this to use a enabled config option -->
+    {{ $recent_articles := (where (where .Site.Pages ".Source.Path" "!=" .Source.Path) "IsPage" true) }}
+    <section id="portfolio" class="bg-light-gray">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading">{{ i18n "latestPostHeading" }}</h2>
+          </div>
+        </div>
+        <div class="row">
+          {{ range first ($.Site.Params.latestSize | default 3) $recent_articles }} {{ .Render "li_sm" }} {{ end }}
+        </div>
+      </div>
+    </section>
+
     {{ if .Site.Params.footer.enable }}
       {{ partial "footer.html" . }}
     {{ end }}

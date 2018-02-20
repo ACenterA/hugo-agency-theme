@@ -5,24 +5,29 @@
       <div class="col-md-4">
         <span class="copyright">{{ with .Site.Params.footer.copyright }}{{ . | markdownify }}{{ end }}</span>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" editor=true parameditable="sidebar-social" editor-data-param="footer.social">
         <ul class="list-inline social-buttons">
-
+          {{ $socialData := .Site.Params.social.data }}
           {{ range .Site.Params.footer.social }}
-            <li><a href="{{ .link }}"><i class="fa {{ .icon }}"></i></a></li>
+            {{ $object := index $socialData .name }}
+            {{ if $object.enable }}
+              <li><a href="{{ $object.link }}"><i class="fa {{ .icon }}"></i></a></li>
+            {{ end }}
           {{ end }}
-
         </ul>
       </div>
       <div class="col-md-4">
         <ul class="list-inline quicklinks">
-
           {{ range .Site.Params.footer.quicklinks }}
-            <li><a href="{{ .link }}">{{ .text  | markdownify }}</a></li>
+            {{ if .enable }}
+              <li><a href="{{ .link }}">{{ .text  | markdownify }}</a></li>
+            {{ end }}
           {{ end }}
-
         </ul>
       </div>
     </div>
   </div>
+  <br/>
+  <br/>
+  <br/>
 </footer>

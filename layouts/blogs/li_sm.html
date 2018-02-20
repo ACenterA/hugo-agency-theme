@@ -1,0 +1,13 @@
+<div class="col-md-4 col-sm-6 portfolio-item article-{{ .Source.Path | md5 }}">
+  <a href="{{ .Permalink }}" class="portfolio-link" title="{{ .Title }}">
+    {{ if .Params.image }}
+     <img {{ with .Params.image | absURL }} src="{{ . }}"{{ end }} alt="{{ .Title }}" class="blog-image-thumbnail">
+    {{ else }}
+     <img {{ with .Site.BaseURL | absURL }} src="{{ . }}img/portfolio/roundicons-preview.png"{{ end }} alt="{{ .Title }}" class="blog-image-thumbnail">
+    {{ end }}
+  </a>
+  <div class="portfolio-caption">
+    <h4 class="title"><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+    <p class="text-muted"><time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05JST" }}">{{ .Lastmod.Format ( .Site.Params.dateformat | default "Jan 2, 2006") }}</time></p>
+  </div>
+</div>

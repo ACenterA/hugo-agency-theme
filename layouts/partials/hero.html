@@ -4,8 +4,7 @@
     <div class="container">
       <div class="intro-text">
         <div editor=true parameditable=true editor-data-param="i18n.heroTitle:Text:Title" class="intro-lead-in">{{ i18n "heroTitle" }}</div>
-        <div editor=true parameditable=true editor-data-param="hero.subtitle:Text:Subtitle" class="intro-heading">{{ with .Site.Params.hero.subtitle }}{{ . | markdownify }}{{ end }}</div>
-        <a editor=true parameditable=true editor-data-param="hero.href:href:Link,hero.buttonText:Text:Button Text" href="{{ with .Site.Params.hero.href }} {{ . }} {{ end }}" class="page-scroll btn btn-xl">{{ with .Site.Params.hero.buttonText }}{{ . }}{{ end }}</a>
+        <div editor=true parameditable=true editor-data-param="i18n.heroSubtitle:Text:Subtitle" class="intro-heading">{{ with i18n "heroSubtitle" }}{{ . | markdownify }}{{ end }}</div>
       </div>
     </div>
   </header>
