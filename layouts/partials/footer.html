@@ -30,4 +30,7 @@
   <br/>
   <br/>
   <br/>
+  {{ if .Params.googleAnalytics }}
+  {{ template "_internal/google_analytics_async.html" . }}
+  {{ end }}
 </footer>
