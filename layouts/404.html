@@ -7,7 +7,7 @@
     {{ partial "nav.html" . }}
 
     {{ "<!-- 404 -->" | safeHTML }}
-    <header>
+    <header editor=true partial='hero' show-editor-menu='imageonly' editor-data-param="hero.background_image:Image:Background Image" class="singleimgbg" style="background-image: url({{ if isset .Site.Params.hero "background_image" }}{{ .Site.Params.hero.background_image | absURL }}{{ else }}{{ .Site.BaseURL | absURL }}{{ end }});">
       <div class="container">
         <div class="404">
           <div class="intro-text">
