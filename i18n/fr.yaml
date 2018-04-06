@@ -16,6 +16,12 @@
 - id: heroSubtitle
   translation: "Lancer votre site Web avec nous dès aujourd'hui"
 
+- id: noPostHeading
+  translation: "Aucun posts"
+
+- id: noPostText
+  translation: "Il n'y a présentement pas de posts, revenez prochainement afin de découvrir notre contenu."
+
 - id: templateBy
   translation: "Template par"
 

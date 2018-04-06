@@ -19,6 +19,12 @@
 - id: latestPostHeading
   translation: "Latest Posts"
 
+- id: noPostHeading
+  translation: "No posts"
+
+- id: noPostText
+  translation: "There is currently no published posts, please come back later to discover our content."
+
 - id: templateBy
   translation: "Template by"
 
