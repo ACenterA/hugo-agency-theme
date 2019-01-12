@@ -34,7 +34,7 @@
     {{ end }}
 
     <!-- todo: Modify this to use a enabled config option -->
-    {{ $recent_articles := (where (where .Site.Pages ".Source.Path" "!=" .Source.Path) "IsPage" true) }}
+    {{ $recent_articles := (where (where .Site.Pages ".Path" "!=" .Path) "IsPage" true) }}
     {{ if $recent_articles }}
     <section id="portfolio" class="bg-light-gray">
       <div class="container">

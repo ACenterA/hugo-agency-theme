@@ -1,4 +1,4 @@
-<div class="col-md-4 col-sm-6 portfolio-item article-{{ .Source.Path | md5 }}">
+<div class="col-md-4 col-sm-6 portfolio-item article-{{ .Path | md5 }}">
   <a href="{{ .Permalink }}" class="portfolio-link" title="{{ .Title }}">
     {{ if .Params.image }}
      <img {{ with .Params.image | absURL }} src="{{ . }}"{{ end }} alt="{{ .Title }}" class="blog-image-thumbnail">
